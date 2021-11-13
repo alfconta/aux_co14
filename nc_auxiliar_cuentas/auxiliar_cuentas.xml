@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+   <record id="view_auxiliar_cuentas_form" model="ir.ui.view">
+        <field name="name">auxiliar.cuentas.form</field>
+        <field name="model">auxiliar.cuentas</field>
+        <field name="arch" type="xml">
+            <form string="Report Options">
+                <group name="filters">
+                    <group string='General Data' style="width:300px;" >
+                     
+                        <field name="company" style="width:300px;"/>
+                        
+                        <field name="seleccion" widget="Radio(radio)" style ="width:300px;"/> 
+                        <field name="cuenta" attrs="{'invisible': [('seleccion', '=', 'grupos')]}" style ="width:300px;"/>
+                        <field name="grupo_cuenta" widget="many2many_tags" attrs="{'invisible': [('seleccion', '=', 'cuenta')]}" style="width:300px;"/>                      
+                        <field name="file_name"/>	                	
+                         <field name="excel_binary"  filename="file_name"/>
+                       
+                            
+                    </group>
+
+                    <group string='Date ' style="width:300px;" >
+                     
+                       
+                        <field name="date_from" style="width:200px;"/>
+                        <field name="date_to" style="width:200px;"/>
+                       
+                    </group>
+                   
+                      <group string='Result'  style="width:200px;">                     
+                            <field name="saldo_inicial" style="width:200px;"/>
+                            <field name="debe" style="width:200px;"/>
+                            <field name="haber" style="width:200px;"/>
+                            <field name="saldo_final" style="width:200px;"/>
+                      
+                       </group>
+
+                      
+                    
+                    
+                </group>
+                 <footer>
+                    <button name="buscar_cuenta" string="Search" type="object" default_focus="1" class="oe_highlight"/>
+                   
+                </footer>
+                <notebook>
+                        <page string="Record Account">
+                            <field name="obj_auxiliar_cuentas_detalle" attrs="{'invisible': [('seleccion', '=', 'grupos')]}" readonly="1" >
+                                <tree string="Record Account Line" editable="bottom " >
+                                    <field name="date"/>                                 
+                                    <field name="date_cr"/>                                                                      
+                                    <field name="company_id"/>
+                                    <field name="usuario"/>
+                                     <field name="account_invoice"/> 
+                                     <field name="concepto"/>                                
+                                    
+                                     <field name="debe"/>                                 
+                                     <field name="haber"/> 
+                                     <field name="saldo"/> 
+                                      
+
+                                </tree>
+                            </field>
+                            
+                        </page>
+                    </notebook>
+
+               
+
+
+
+
+            </form>
+        </field>
+    </record>
+
+     <record id="action_auxiliar_cuentas_tree_view" model="ir.ui.view">
+            <field name="name">auxiliar.cuentas.tree</field>
+            <field name="model">auxiliar.cuentas</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="date_from"/>
+					<field name="date_to"/>
+                    <field name="cuenta"/>
+                    
+                   
+							
+                </tree>
+            </field>
+   </record>
+
+	
+    <record id="action_auxiliar_cuentas" model="ir.actions.act_window">
+        <field name="name">Account movement report</field>
+        <field name="type">ir.actions.act_window</field> 
+        <field name="res_model">auxiliar.cuentas</field>
+        <field name="view_id" ref="action_auxiliar_cuentas_tree_view"/> 
+       <!-- <field name="binding_view_types">form</field> -->
+        <field name="view_mode">tree,form</field>
+        
+        
+        
+        
+    </record>
+
+     
+  
+
+<menuitem name="Account movement report"  id="menu_action_auxiliar_cuentas"
+       parent="account.menu_finance_reports"/>  
+
+    <menuitem name="Account movement "  action="action_auxiliar_cuentas" 
+    id="menu_auxiliar_cuentas"   parent="menu_action_auxiliar_cuentas" />
+
+  
+
+     
+
+     
+
+
+
+</data>
+</odoo>

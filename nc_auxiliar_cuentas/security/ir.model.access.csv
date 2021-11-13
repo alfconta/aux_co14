@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+auxiliar_cuentas_model_access_right_user,auxiliar_cuentas_model_access_right,model_auxiliar_cuentas,base.group_user,1,1,1,1
+auxiliar_cuentas_detalle_model_access_right_user,auxiliar_cuentas_detalle_model_access_right,model_auxiliar_cuentas_detalle,base.group_user,1,1,1,1
+
